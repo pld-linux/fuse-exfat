@@ -1,13 +1,13 @@
 Summary:	FUSE module to access exFAT filesystem
 Summary(pl.UTF-8):	Moduł FUSE pozwalający na dostęp do systemu plików exFAT
 Name:		fuse-exfat
-Version:	0.9.3
+Version:	0.9.4
 Release:	1
 License:	GPL v3+
 Group:		Applications/System
 #Source0Download: http://code.google.com/p/exfat/downloads/list
 Source0:	http://exfat.googlecode.com/files/%{name}-%{version}.tar.gz
-# Source0-md5:	42b5e36062cc3f89efd6c8d9b74c0c5d
+# Source0-md5:	f9d66d9a8358c9151e38a97721f6101a
 URL:		http://code.google.com/p/exfat/
 BuildRequires:	libfuse-devel >= 2.6
 BuildRequires:	rpmbuild(macros) >= 1.385
@@ -32,15 +32,17 @@ Obecny status tego projektu to beta.
 %setup -q
 
 %build
-%scons
+%scons \
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-DESTDIR=$RPM_BUILD_ROOT/sbin \
-%scons install
+%scons install \
+	DESTDIR=$RPM_BUILD_ROOT/sbin
 
-install fsck/exfatck $RPM_BUILD_ROOT/sbin
+install -d $RPM_BUILD_ROOT%{_mandir}/man8
+install fuse/mount.exfat-fuse.8 $RPM_BUILD_ROOT%{_mandir}/man8
+echo '.so mount.exfat-fuse.8' >$RPM_BUILD_ROOT%{_mandir}/man8/mount.exfat.8
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -48,6 +50,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc ChangeLog
-%attr(755,root,root) /sbin/exfatck
 %attr(755,root,root) /sbin/mount.exfat
 %attr(755,root,root) /sbin/mount.exfat-fuse
+%{_mandir}/man8/mount.exfat.8*
+%{_mandir}/man8/mount.exfat-fuse.8*
