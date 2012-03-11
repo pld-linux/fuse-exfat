@@ -1,13 +1,13 @@
 Summary:	FUSE module to access exFAT filesystem
 Summary(pl.UTF-8):	Moduł FUSE pozwalający na dostęp do systemu plików exFAT
 Name:		fuse-exfat
-Version:	0.9.6
+Version:	0.9.7
 Release:	1
 License:	GPL v3+
 Group:		Applications/System
 #Source0Download: http://code.google.com/p/exfat/downloads/list
 Source0:	http://exfat.googlecode.com/files/%{name}-%{version}.tar.gz
-# Source0-md5:	809be0bc49c3b2be3f2d0fd115d36709
+# Source0-md5:	ea8eddcc68ec8881cb8a280086297e39
 URL:		http://code.google.com/p/exfat/
 BuildRequires:	libfuse-devel >= 2.6
 BuildRequires:	rpmbuild(macros) >= 1.385
