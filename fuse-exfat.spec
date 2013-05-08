@@ -2,7 +2,7 @@ Summary:	FUSE module to access exFAT filesystem
 Summary(pl.UTF-8):	Moduł FUSE pozwalający na dostęp do systemu plików exFAT
 Name:		fuse-exfat
 Version:	1.0.1
-Release:	2
+Release:	3
 License:	GPL v3+
 Group:		Applications/System
 #Source0Download: http://code.google.com/p/exfat/downloads/list
@@ -36,6 +36,12 @@ cd ../libexfat
 %patch1 -p0
 
 %build
+# "fuse: unknown option `'" error with gold
+install -d ld-dir
+[ ! -x /usr/bin/ld.bfd ] || ln -sf /usr/bin/ld.bfd ld-dir/ld
+
+PATH=$(pwd)/ld-dir:$PATH
+
 %scons
 
 %install
