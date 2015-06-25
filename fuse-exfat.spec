@@ -1,17 +1,14 @@
 Summary:	FUSE module to access exFAT filesystem
 Summary(pl.UTF-8):	Moduł FUSE pozwalający na dostęp do systemu plików exFAT
 Name:		fuse-exfat
-Version:	1.0.1
-Release:	3
+Version:	1.1.0
+Release:	1
 License:	GPL v3+
 Group:		Applications/System
 #Source0Download: http://code.google.com/p/exfat/downloads/list
-Source0:	http://exfat.googlecode.com/files/%{name}-%{version}.tar.gz
-# Source0-md5:	7988a5111841593231f20af22153362d
-# svn diff -r342:HEAD http://exfat.googlecode.com/svn/trunk/fuse > exfat-svn-fuse.patch
-Patch0:		exfat-svn-fuse.patch
-# svn diff -r342:HEAD http://exfat.googlecode.com/svn/trunk/libexfat > exfat-svn-libexfat.patch
-Patch1:		exfat-svn-libexfat.patch
+#Source0:	http://exfat.googlecode.com/files/%{name}-%{version}.tar.gz
+Source0:	%{name}-%{version}.tar.gz
+# Source0-md5:	b2a23c032661cb1c1da4514e7af33916
 URL:		http://code.google.com/p/exfat/
 BuildRequires:	libfuse-devel >= 2.6
 BuildRequires:	rpmbuild(macros) >= 1.385
@@ -30,10 +27,6 @@ moduł FUSE.
 
 %prep
 %setup -q
-cd fuse
-%patch0 -p0
-cd ../libexfat
-%patch1 -p0
 
 %build
 # "fuse: unknown option `'" error with gold
@@ -42,11 +35,13 @@ install -d ld-dir
 
 PATH=$(pwd)/ld-dir:$PATH
 
+export CFLAGS="%{rpmcflags} -std=c99"
 %scons
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
+export CFLAGS="%{rpmcflags} -std=c99"
 %scons install \
 	DESTDIR=$RPM_BUILD_ROOT/sbin
 
