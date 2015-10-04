@@ -1,0 +1,11 @@
+--- fuse-exfat-1.2.1/configure.ac.orig	2015-09-24 07:45:55.000000000 +0200
++++ fuse-exfat-1.2.1/configure.ac	2015-10-04 11:43:39.207363931 +0200
+@@ -25,7 +25,7 @@
+ 	[relan@users.noreply.github.com],
+ 	[fuse-exfat],
+ 	[https://github.com/relan/exfat])
+-AM_INIT_AUTOMAKE([1.11.2 -Wall -Werror foreign subdir-objects no-installman])
++AM_INIT_AUTOMAKE([1.11.2 -Wall -Werror foreign subdir-objects])
+ AC_PROG_CC
+ AC_PROG_CC_C99
+ AC_PROG_RANLIB
