@@ -1,19 +1,20 @@
 Summary:	FUSE module to access exFAT filesystem
 Summary(pl.UTF-8):	Moduł FUSE pozwalający na dostęp do systemu plików exFAT
 Name:		fuse-exfat
-Version:	1.3.0
+Version:	1.4.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
 #Source0Download: https://github.com/relan/exfat/releases
 Source0:	https://github.com/relan/exfat/releases/download/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	846b8c36bfa4684719f9e08e9d3a6bff
+# Source0-md5:	765bf2484d48e5c253d0d8cb8de4f8c0
 URL:		https://github.com/relan/exfat
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.11.2
-BuildRequires:	libfuse-devel >= 2.6
+# also libfuse-devel >= 2.6 possible, but libfuse3 is preferred
+BuildRequires:	libfuse3-devel >= 3
 BuildRequires:	pkgconfig
-Requires:	libfuse-tools >= 2.6
+Requires:	libfuse3-tools >= 3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sbindir	/sbin
